@@ -1,0 +1,20 @@
+extends base.pug
+block title
+    title EGZAMIN #{mem.id} mem page
+block content
+    article.glowna.memowa
+        .tytul.wielki #{mem.title}
+        img(src=`${mem.imageUrl}` alt = `${mem.title}`)
+        .opis #{mem.description}
+        table
+            thead
+                tr
+                    th(scope='col') Galeria
+                    th(scope='col') Od
+                    th(scope='col') Do
+                tbody
+                    each display in displays
+                        tr.tooltip
+                            td #{display.GalleryName}
+                            td #{display.from}
+                            td #{display.till}

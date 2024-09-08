@@ -1,0 +1,11 @@
+fun f1() -> lambda<() -> int> {
+    fun f2(lambda<() -> int> base) -> lambda<() -> int> {
+        return () -> int {return base()+1;};
+    }
+    fun f3() -> lambda<() -> int> {
+        return () -> int {return 5;};
+    }
+    return () -> int {return f2(f3())() + 4;};
+}
+
+printEndl("Expected: 10, got:", f1()());

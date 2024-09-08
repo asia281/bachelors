@@ -1,0 +1,4 @@
+trasa(0, 2, 3, 2, oba, 4).
+trasa(1, 2, 3, 1, oba, 5).
+trasa(2, 2, 3, 3, jeden, 1).
+trasa(3, 2, 3, 3, oba, 3).

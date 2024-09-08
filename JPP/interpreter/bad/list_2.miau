@@ -1,0 +1,5 @@
+//  9 (obsługa błędów wykonania) OutOfRangeExeption
+
+list<bool> bool_lista;
+bool_lista.push(true);
+bool_lista.push(10);

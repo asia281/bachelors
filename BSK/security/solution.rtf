@@ -1,0 +1,145 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red255\green255\blue255;
+\red255\green255\blue255;\red255\green255\blue255;\red255\green255\blue255;\red255\green255\blue255;\red255\green255\blue255;
+\red247\green249\blue249;\red22\green25\blue28;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c99926;\cssrgb\c100000\c100000\c99941;
+\cssrgb\c100000\c100000\c99926;\cssrgb\c100000\c100000\c99956;\cssrgb\c100000\c100000\c99941;\cssrgb\c100000\c100000\c99956;\cssrgb\c100000\c100000\c99940;
+\cssrgb\c97584\c97977\c98004;\cssrgb\c11445\c13020\c14546;\csgray\c0;\cssrgb\c100000\c100000\c99971;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14860\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+WERSJA PROSTSZA\
+FLAGA: BSK\{N0w_7ry_tH3_H4rd3R_V3R810n\}\
+\
+Chcemy u\uc0\u380 y\u263  ROP, tzn syscall do sh. Do zacz\u281 cia rozwi\u261 zania musimy znale\u378 \u263  adresy calli do pop [register] ; ret. Skorzysta\u322 am z nast\u281 puj\u261 cych komend:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 ROPgadget --binary decompress_easier | grep "pop [register] ; ret"\cb3 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb4 \
+I otrzyma\uc0\u322 am:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x0000000000449467 : pop rax ; ret\cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x00000000004018c2 : pop rdi ; ret\cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x000000000040f38e : pop rsi ; ret\cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x00000000004017cf : pop rdx ; ret\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+Analogicznie robi\uc0\u261 c \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 ROPgadget --binary decompress_easier | grep \'93syscall\'94\cb5 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb4 \
+Znajduje adres (jedynego syscalla wyst\uc0\u281 puj\u261 cego \'93samotnie\'94):\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x00000000004012d3 : syscall\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb6 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+Nast\uc0\u281 pnie, wysy\u322 amy do serwera kolejno bajty sprawiajace, ze:\
+\
+1. Na samym pocz\uc0\u261 tku chcemy zmieni\u263  najbardziej znacz\u261 cy bajt na najwi\u281 kszy mo\u380 liwy podzielny przez 8, czyli na 0xf8.\
+2. Reszt\uc0\u281  adresu kopiujemy z 7 pozycji sprzed bufora (czyli buf-7 do buf-1) \
+3. Reszte bufora (1016 bajtow \'97 od 8 do 1023) wype\uc0\u322 niamy repetitive ci\u261 giem \'93/bin/sh\\0\'94\
+4. Korzystaj\uc0\u261 c z wiedzy z labu, wiemy ze musimy teraz wstawi\u263  8 bajt\'f3w \'93zape\u322 niaj\u261 cych\'94 \u347 mieci pomi\u281 dzy buforem a docelowym miejscem dla kanarka.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb7 5. Kopiujemy kanarka, aby na koniec programu pozytywnie przej\uc0\u347 \u263  sprawdzenie tego\u380  kanarka. Mo\u380 emy go wzi\u261 \u263  ze stosu, na kt\'f3ry zosta\u322  przepisany podczas wywo\u322 ania funkcji systemowej puts.  Korzystaj\u261 c z gdb stawiamy b na pierwszym readn i przegl\u261 damy stos. Potem, korzystaj\u261 c z funkcji canary z pwntools, znajdujemy dystans kanarka do buforu, kt\'f3ry w naszym przypadku jest r\'f3wny 264. \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb6 \
+6. Nastepnym komponentem jest nadpisanie return address z maina naszym ROPchainem, kt\'f3rego komponentami b\uc0\u281 d\u261  kolejno: \
+	> dodanie odpowiednich warto\uc0\u347 ci na stos, aby sta\u322 y si\u281  warto\u347 ciami kolejnych rejestr\'f3w przy pop [register] ; ret. Chcemy zrobi\u263  syscall \cb7 sys_execve, wi\uc0\u281 c rejestry b\u281 d\u261  musialy mie\u263  wartosci\cb6 :\
+	- \cb4 rax = 59\
+	- rdi = /bin/sh (const char *filename) oczywi\uc0\u347 cie string musi by\u263  null terminated, aby to uzyska\u263 , kopiujemy pod odpowiedni adres adres pocz\u261 tku bufora, kt\'f3ry wskazuje na pewny ci\u261 g \'93\cb8 /bin/sh\\0\'94\cb4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb9 	- rsi = 0\cb4 , \cb9 rdx = 0 (mamy tylko zrobi\uc0\u263  cat \cb10 /home/pwn/flag.txt\cb9 , stad nie potrzebujemy dodatkowych zmiennych).\cb4 \
+	> wywo\uc0\u322 anie syscalla\
+\
+7. Wyj\uc0\u347 cie z fora i return z maina\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb5 WERSJA TRUDNIEJSZA\
+FLAGA: \cb4 BSK\{W4s_tH4T_a_bUFf3r_UNd3r_fl0W?\}\
+\
+Dodana jest flaga \'97static-pie, kt\'f3ra sprawia, ze adresy syscall oraz pop [register] ; ret nie s\uc0\u261  stale, tylko zale\u380 \u261  od konkretnego wywo\u322 ania. Wiemy jednak, ze r\'f3\u380 nice pomi\u281 dzy konkretnymi adresami s\u261  stale, mo\u380 emy skorzystac ze sta\u322 o\u347 ci r\'f3wnic pomi\u281 dzy main (pocz\u261 tkiem maina), a odpowiednimi komendami. Aby uzyska\u263  te r\'f3\u380 nice, wykonujemy najpierw: \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 objdump -d decompress | less 
+\fs24 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 I szukam po s\uc0\u322 owie kluczowym main, znajduj\u261 c nast\u281 puj\u261 cy adres:\
+main: 
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 000000000000a114\
+
+\fs24 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+Nast\uc0\u281 pnie, tak jak w wersji \u322 atwej wywo\u322 uje: 
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 ROPgadget --binary decompress | grep "pop [register] ; ret"
+\fs24 \cf2 \cb7 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\partightenfactor0
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x0000000000051797 : pop rax ; ret
+\fs24 \cf2 \cb7 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x0000000000009b3f : pop rdx ; ret
+\fs24 \cf2 \cb7 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x00000000000176be : pop rsi ; ret
+\fs24 \cf2 \cb7 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x0000000000009c32 : pop rdi ; ret\
+\
+I to samo dla syscalla:
+\fs24 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs22 \cf12 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 0x0000000000009643 : syscall\
+
+\fs24 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+Ustawiam offsety w kodzie, odejmuj\uc0\u261 c od siebie dwa adresy. Moim g\u322 \'f3wnym celem jest teraz wydobycie z programu aktualnego adresu maina, aby otrzyma\u263  adresy dla wszystkich komend powy\u380 ej [doda\u263  main_address + offset]. Zaczn\u281  od znalezienia adresu powrotu z pierwszego readn, aby  \
+\
+Szukam tego z gdb, robie breakpoint na readn oraz po doj\uc0\u347 ciu do tego breakpointu wpisuje: \
+x/256 ($rbp - 0x700)\
+\
+Gdzie 0x700 musi by\uc0\u263  na tyle du\u380 \u261  liczba, \u380 eby\u347 my adres powrotu z readn mie\u347 ci\u322  si\u281  na wypisanym ekranie. W naszym przypadku b\u281 dzie adres powrotu to bedzie 
+\f1\fs28 \cb13 <main+136>.  
+\f0\fs24 \cb4 \
+Widze r\'f3wnie\uc0\u380 , ze bufpos jest pod adresem o 40 wi\u281 kszym, ni\u380  szukany adres powrotu z readn (pod bufpos jest adres pocz\u261 tku bufora, wi\u281 c jest to \u322 atwo znale\u378 \u263 ). Oznacza to, ze aby skopiowa\u263  adres do bufora (kt\'f3ry na ko\u324 cu chcemy wypisac), musimy skopiowa\u263  elementy z bufpos - 40. \
+\
+Kolejno w pierwszym sendzie (wykonanie \'93pierwszego\'94 maina), robimy:\
+1. Umieszczenie najmniej znacz\uc0\u261 cego bajtu 0x9a na 0x14\
+2. Przepisanie reszty adresu do buforu\
+3. Przekopiowanie kanarka, tak jak w \uc0\u322 atwiejszej wersji, czyli z pozycji buf-264, na nast\u281 pne 8 bajt\'f3w buforu (do odczytania pozniej).\
+4. Wype\uc0\u322 nienie reszty buforu\
+5. Wstawienie \cb7 8 bajt\'f3w \'93smieci\'94 przed kanarkiem.\cb4 \
+6. Nast\uc0\u281 pnie, przekopiowanie do odpowiedniego miejsca w pami\u281 ci tego samego kanarka, aby canary check w return sko\u324 czy\u322  si\u281  sukcesem. \
+7. Wstawienie 8 bajt\'f3w na SFP, pomi\uc0\u281 dzy kanarkiem a return addressem.\
+8. Nadpisanie return addressu wej\uc0\u347 ciem do maina, aby po return main wywo\u322 a\u322  si\u281  drugi raz\
+9. \cb7 Wyj\uc0\u347 cie z fora i return z maina\
+\cb4 \
+\
+Potem, zczytujemy recievem pierwsze 8 bajt\'f3w, czyli main_address oraz drugie 8 bajt\'f3w, czyli kanarka. \
+\
+W drugim sendzie (wykonaniu \'93drugiego\'94 maina) algorytm jest taki sam, r\'f3\uc0\u380 nic\u261  jest przepisanie kanarka, kt\'f3re nie jest robione z buf-264, tylko ze zmiennej wczytanej recievem:\
+\
+}

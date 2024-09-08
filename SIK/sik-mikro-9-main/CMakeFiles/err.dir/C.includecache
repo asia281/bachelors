@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/asik/sik/sik-mikro-9/err.c
+errno.h
+-
+stdio.h
+-
+stdlib.h
+-
+stdarg.h
+-
+string.h
+-
+err.h
+/home/asik/sik/sik-mikro-9/err.h
+
+/home/asik/sik/sik-mikro-9/err.h
+

@@ -1,0 +1,6 @@
+//  12 (statyczne typowanie)
+
+fun test() -> int{
+};
+
+test();

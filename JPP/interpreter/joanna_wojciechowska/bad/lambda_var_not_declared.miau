@@ -1,0 +1,4 @@
+int u = 2;
+lambda<(int, int) -> int> var4 = (int x, int y) -> int { return x + y + u + z; }
+int z = 4;
+int four = var4(1, 3);

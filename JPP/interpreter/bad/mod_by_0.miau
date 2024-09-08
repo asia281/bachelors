@@ -1,0 +1,7 @@
+//  9 (obsługa błędów wykonania) ZeroDivisionException
+
+int y = 0;
+int z = 5 % y;
+
+print(y, z);
+

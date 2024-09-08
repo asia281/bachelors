@@ -1,0 +1,36 @@
+extends base.pug
+block title
+    title EGZAMIN planet page
+block content
+    main.main
+        .planetdesc
+            .bigplanetname #{context.planetName}
+            img.bigplanetimage(src=`../${context.imageUrl}` alt=`context.planetName`)
+            div
+                | Planeta #{context.planetName} dysponuje nast&eogon;puj&aogon;cymi instalacjami:
+                table
+                    thead
+                    tbody
+                        tr
+                            td Doki klasy A:    
+                            td #{context.docksA}
+                        tr
+                            td Doki klasy B:
+                            td #{context.docksB}
+                        tr
+                            td Doki klasy C:
+                            td #{context.docksC}
+            table.dockings
+                thead
+                    tr
+                        th(scope='col') Nazwa statku
+                        th(scope='col') Wielko&sacute;&cacute;
+                        th(scope='col') Przylot
+                        th(scope='col') Wylot
+                tbody
+                    each val in context.list 
+                        tr
+                            td #{val.SpaceshipName}
+                            td #{val.Spaceship.class}
+                            td #{val.from}
+                            td #{val.till}

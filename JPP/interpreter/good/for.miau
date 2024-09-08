@@ -1,0 +1,36 @@
+# 08 (pętla for)
+
+
+fun factorial(int x) -> int {
+    int i;
+    int res = 1;
+    for (i from 1 to x){
+        res = res * i;
+    }
+    return res;
+}
+
+int fac = factorial(6);
+
+fun pow(int x, int exp) -> int {
+    int i;
+    int res = 1;
+
+    for (i from 1 to exp){
+        res = res * x;
+    }
+    return res;
+}
+
+int y = pow(2, 4);
+printEndl("Expected: 720 16, got:", fac, y);
+
+int i;
+
+for (i from y to 20){
+    if (i % 4 == 1) {
+        i = i + 2;
+    }
+    printEndl(i); # 16, 19, 20
+}
+

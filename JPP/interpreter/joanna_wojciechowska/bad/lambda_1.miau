@@ -1,0 +1,3 @@
+
+lambda<() -> bool> var2 = () -> int { return 2; }
+ 

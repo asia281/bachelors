@@ -1,0 +1,35 @@
+# 01 (dwa typy) int, bool
+# 02 (arytmetyka, porównania)
+# 03 (zmienne, przypisanie)
+# 04 (print)
+# 05 (while, if)
+
+fun isEven(int x) -> bool {
+    return x % 2 == 0;
+}
+
+printEndl("Expected: 1, got", -1 % 2);
+
+int x;
+x = 6;
+
+bool y = x < 5;
+if (y) {
+	x = x + 2;
+}
+else {
+	if (not true) {
+		x = x + 1;
+	}
+	else{
+		x = 2*x - 1;
+	}
+}
+
+printEndl("Expected: 11 10, got", x, x-1);
+
+while (x < 16) {
+	x = x + 1;
+}
+
+printEndl("Expected: 16, got", x);

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/asik/sik/sik-mikro-9/dropnobody.c
+pwd.h
+-
+stdlib.h
+-
+sys/types.h
+-
+unistd.h
+-
+err.h
+/home/asik/sik/sik-mikro-9/err.h
+
+/home/asik/sik/sik-mikro-9/err.h
+

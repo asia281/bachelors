@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdropnobody.a  CMakeFiles/dropnobody.dir/dropnobody.c.o
+/usr/bin/ranlib libdropnobody.a

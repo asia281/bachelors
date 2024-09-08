@@ -1,0 +1,3 @@
+//  9 (obsługa błędów wykonania) ZeroDivisionException
+
+int x = 10 / 0;

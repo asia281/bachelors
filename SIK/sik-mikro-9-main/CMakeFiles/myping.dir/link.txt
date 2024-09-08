@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wall  -rdynamic CMakeFiles/myping.dir/myping.c.o  -o myping  liberr.a libin_cksum.a libdropnobody.a 

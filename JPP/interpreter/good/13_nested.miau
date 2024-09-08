@@ -1,0 +1,27 @@
+//  12 (funkcje zagnieżdżone ze statycznym wiązaniem)
+
+int i;
+fun increment(int n) -> int {
+	int i = 5;
+	fun ident(int x) -> lambda<() -> int> {
+		return () -> int { return x; };
+	}
+	return ident(n)() + 1;
+}
+
+printEndl("Expected: 0 got:", i);
+
+fun ident(int n) -> lambda<() -> int> {
+	fun increment(& int x) -> lambda<() -> int> {
+		return () -> int { return x + 3; };
+	}
+
+	return increment(& n);
+}
+
+printEndl("Expected: 8 got:", increment(7));
+
+lambda<() -> int> id = ident(2);
+for (i from 1 to 10){
+	printEndl(i, id());
+}

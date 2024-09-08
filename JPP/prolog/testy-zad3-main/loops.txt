@@ -1,0 +1,2 @@
+trasa(r1, a, a, rower, oba, 1).
+trasa(r2, b, b, rower, jeden, 1).

@@ -1,0 +1,9 @@
+#include "fs.h"
+#include "file.h"
+
+int do_notify(void) {
+    int fd = job_m_in.m_lc_vfs_notify.fd;
+    int event = job_m_in.m_lc_vfs_notify.event;
+
+    if ()
+}

@@ -1,0 +1,82 @@
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(a,a)-> a
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(b,b)-> b
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(123,123)-> 123
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(+,+)-> +
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(#,#)-> #
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(+-*/\^><=:.?@#$&,+-*/\^><=:.?@#$&)-> +-*/\^><=:.?@#$&
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -([],[])-> []
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -({},{})-> {}
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(;,;)-> ;
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(!,!)-> !
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(a,a)-> a
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(b,b)-> b
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(123,123)-> 123
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(+,+)-> +
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(#,#)-> #
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(+-*/\^><=:.?@#$&,+-*/\^><=:.?@#$&)-> +-*/\^><=:.?@#$&
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -([],[])-> []
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -({},{})-> {}
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(;,;)-> ;
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+start -(!,!)-> !
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  
+Koniec programu. Milych wedrowek!

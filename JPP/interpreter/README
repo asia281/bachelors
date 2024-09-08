@@ -1,0 +1,165 @@
+      |    |     | Na 15 punktów                                   |
+      |----+-----+-------------------------------------------------|
+      | 01 |     | (trzy typy)                                     |
+      | 02 |     | (literały, arytmetyka, porównania)              |
+      | 03 |     | (zmienne, przypisanie)                          |
+      | 04 |     | (print)                                         |
+      | 05 |     | (while, if)                                     |
+      | 06 |     | (funkcje lub procedury, rekurencja)             |
+      | 07 |     | (referencje)                                    |
+      |----+-----+-------------------------------------------------|
+      |    |     | Na 20 punktów                                   |
+      |----+-----+-------------------------------------------------|
+      | 09 |     | (przesłanianie i statyczne wiązanie)            |
+      | 10 |     | (obsługa błędów wykonania)                      |
+      | 11 |     | (funkcje zwracające wartość)                    |
+      |----+-----+-------------------------------------------------|
+      |    |     | Na 30 punktów                                   |
+      |----+-----+-------------------------------------------------|
+      | 12 |  4  | (statyczne typowanie)                           |
+      | 13 |  2  | (funkcje zagnieżdżone ze statycznym wiązaniem)  |
+      | 14 |  1  | listy                                           |
+      | 17 |  4  | (funkcje wyższego rzędu, anonimowe, domknięcia) |
+
+      Razem: 20 + 4 + 2 + 1 + 4 = 31
+
+Język Miauler (fr., czyt. miule), jezyk imperatywny. Rozszerzenie: .miau.
+-------------------------------------------------------------------
+  01 (typy):
+Trzy typy: int, bool oraz string. Dodatkowo void 
+-------------------------------------------------------------------
+  02 (literały, arytmetyka, porównania)
+Literały:
+int: ciąg cyfr, który może rozpocząć się znakiem "-".
+bool: true lub false.
+string: napis zapisany w cudzysłowach "".
+
+Arytmetyka:
+Operatory arytmetyczne: +, -, *, /, % oraz -liczba (zanegowanie liczby).
+Operatory logiczne: and, or, not.
+
+Porównania:
+Operatory porównania: <, <=, >, >=, ==, !=.
+-------------------------------------------------------------------
+  03 (zmienne, przypisanie)
+- Zmienne:
+[Type] [Id]
+lub
+[Type] [Id] = [Expr]
+
+Czyli zadeklarowanie zmiennej bez i z przypisaniem. Wyliczanie expressions będzie eager.
+W przypadku zadeklarowania bez przypisania, domyslne wartosci to:
+int = 0
+bool = false
+string = ""
+list = []
+
+- Przypisanie:
+[Id] = [Expr]
+
+
+-------------------------------------------------------------------
+  04 (print)
+print([Expr])
+printEndl([Expr])
+
+Wyliczenie Expr od lewej do prawej i wypisanie na standardowe wyjście.
+printEndl ma na koncu dodatkowy endline.
+
+-------------------------------------------------------------------
+  05 (while, if)
+while([condition]){ 
+	[Stmt]
+}
+
+if([condition]){ 
+	[Stmt]
+}
+
+oraz
+
+if([condition]){ 
+	[Stmt]
+}
+else([condition]){
+	[Stmt]
+}
+
+-------------------------------------------------------------------
+  06 (funkcje lub procedury, rekurencja)
+fun [Id]([argumenty]) -> typ_zwracany{
+	[Stmt]
+}
+
+Jak widac na opisie, po identyfikatorze funkcji "fun" następuje nazwa funkcji, a nastepnie argumenty (po przecinku).
+Później występuje "->", a po strzalce znajduje sie zwracany typ.
+Mozlwie typy zwracane, to:
+int, bool, string, list<typ>, struct[Id] oraz void (w tym przypadku będziemy mieli procedurę).
+
+Argumenty są przykazywane przez wartość, chyba ze
+przed argumentem występuje "&", co oznacza, ze zmienna jest przekazywana przez referencje.
+
+-------------------------------------------------------------------
+  07 (przez zmienną / przez wartość / in/out)
+[ideant]([argumenty])
+
+Jeśli przed danym argumentem funkcji wystepuje "&", nalezy dodac "&" w trakcie przekazywania argumentu.
+Wtedy oczywiscie nalezy przekazywac nazwę zmiennej (Idyfikator), a nie wyrazenie. 
+
+-------------------------------------------------------------------
+  08 (zmienne read-only i/lub pętla for)
+Pętla for:
+
+for([var] from [Expr] to [Expr]){
+  [Stmt]
+}
+
+  Na 20 punktów
+-------------------------------------------------------------------
+  09 (przesłanianie i statyczne wiązanie)
+Będzie.
+
+-------------------------------------------------------------------
+  10 (obsługa błędów wykonania)
+Mozliwe bledy wykonania:
+    data RuntimeExceptions = NoReturnException 
+                            | ZeroDivisionException
+                            | PrintNotDefined
+                            | OutOfRangeExeption Integer Integer
+
+    data TypeCheckerExceptions = TypeCheckException Type Type 
+                                | DeclarationInvTypeException Type 
+                                | FuncArgsInvTypeException Type 
+                                | NotListException Type 
+                                | InvalidTypesInApplication
+                                | IncorrectNumberOfArguments Int Int
+                                | NonUniqueArgName String String
+                                | IdentifierNotExistException String 
+                                | ReturnTypeMismatchException Type Type deriving Show
+
+-------------------------------------------------------------------
+  11 (funkcje zwracające wartość)
+return Expr
+
+  Na 30 punktów
+-------------------------------------------------------------------
+  12 (4) (statyczne typowanie)
+Typowanie będzie statyczne.
+
+-------------------------------------------------------------------
+  13 (2) (funkcje zagnieżdżone ze statycznym wiązaniem)
+Będą.
+-------------------------------------------------------------------
+  14 (1/2) (rekordy/listy/tablice/tablice wielowymiarowe)
+Listy będą.
+
+  15 (2) (krotki z przypisaniem)
+  16 (1) (break, continue)
+  17 (4) (funkcje wyższego rzędu, anonimowe, domknięcia)
+
+Funkcje anonimowe:
+lambda <([typ]) -> typ_zwracany> nazwa = (argumenty) -> typ_zwracany {}
+
+Lambda dostanie cale srodowisko. 
+Funkcje wyzszego rzedu (funkcje jako parametry) będą. 
+

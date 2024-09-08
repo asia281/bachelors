@@ -1,0 +1,19 @@
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+a -(r1,rower)-> a
+Dlugosc trasy: 1.
+
+a -(r1,rower)-> a -(r1,rower)-> a
+Dlugosc trasy: 2.
+
+a -(r1,rower)-> a
+Dlugosc trasy: 1.
+
+a -(r1,rower)-> a -(r1,rower)-> a
+Dlugosc trasy: 2.
+
+Podaj miejsce startu:  Podaj miejsce koncowe: Podaj warunki : 
+b -(r2,rower)-> b
+Dlugosc trasy: 1.
+
+Podaj miejsce startu:  
+Koniec programu. Milych wedrowek!

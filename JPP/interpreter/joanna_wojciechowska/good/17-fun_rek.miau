@@ -1,0 +1,22 @@
+fun pow2(int exp) -> int {
+    if (exp == 0) {
+        return 1;
+    }
+    if (exp % 2 == 0) {
+        return pow2(exp / 2) * pow2(exp / 2);
+    }
+    return 2 * pow2((exp - 1) / 2) * pow2((exp - 1) / 2);
+}
+
+int pow = pow2(5);
+
+printEndl("Expected: 32, got:", pow);
+
+
+fun pow4(int exp) -> int {
+    return pow2(exp * 2);
+}
+
+int pow' = pow4(5);
+
+printEndl("Expected: 1024, got:", pow');

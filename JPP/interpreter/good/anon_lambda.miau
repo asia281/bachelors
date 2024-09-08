@@ -1,0 +1,9 @@
+
+
+print(((int a, int b) -> int { return a+b; })(5, 3));
+
+
+int x = ((int a, int b) -> int { return a*b; })(5, 3);
+
+
+printEndl(x);

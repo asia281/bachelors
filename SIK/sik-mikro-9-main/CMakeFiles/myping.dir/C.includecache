@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/asik/sik/sik-mikro-9/err.h
+
+/home/asik/sik/sik-mikro-9/myping.c
+sys/types.h
+-
+sys/socket.h
+-
+netdb.h
+-
+stdio.h
+-
+stdlib.h
+-
+signal.h
+-
+string.h
+-
+unistd.h
+-
+sys/time.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+netinet/ip_icmp.h
+-
+err.h
+/home/asik/sik/sik-mikro-9/err.h
+

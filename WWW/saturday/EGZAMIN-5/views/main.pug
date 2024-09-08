@@ -1,0 +1,22 @@
+extends base.pug
+block content    
+  form(action='/add_movie', method='POST')
+    p
+      | title: 
+      input(type='text', name='title', value='')
+      |          year: 
+      input(type='text', name='year', value='')
+      |          imdb: 
+      input(type='text', name='imdb', value='')
+    input(type='submit', value='Submit')
+
+    section.planetList
+    .title Obs&lstrok;ugiwane planety
+    ul
+    each planet in context.list
+      li
+        img.planetimg.left(src=`../static/${planet.imageUrl}` alt=`${planet.name} picture`)
+        .planetname #{planet.name}
+        div Doki: #{planet.dokiA} #{planet.dokiB} #{planet.dokiC}
+        div Rezerwacje: #{planet.dataValues.pn}
+        a(href=`/planet/${planet.name}`) Strona planety&gt;&gt;

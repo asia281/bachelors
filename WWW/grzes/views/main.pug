@@ -1,0 +1,17 @@
+extends base.pug
+block title
+    title EGZAMIN main page
+
+block content
+    article.planetslist
+        .title Obsługiwane planety
+        if context.planets.length == 0
+            | Brak planet jakichkolwiek w bazce...
+        ul
+            each planet in context.planets
+                li
+                    img.planetimg.left(src=`${planet.imageUrl}`)
+                    .planetname #{planet.name}
+                    .docks Doki #{planet.docksA} #{planet.docksB} #{planet.docksC}
+                    div Rezerwacje: #{planet.reservations}
+                    a(href=`/planet/${planet.name}`) Strona planety

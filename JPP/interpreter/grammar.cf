@@ -1,0 +1,101 @@
+-- Program ------------------------------------------------
+
+entrypoints Program ;
+Program.   Program ::= [ Stmt ] ;
+
+-- stmts --------------------------------------------------
+Block.     Block ::= "{" [Stmt] "}" ;
+separator  Stmt "" ;
+
+Decl.      Stmt ::= Type Item ;
+NoInit.    Item ::= Ident ; 
+Init.      Item ::= Ident "=" Expr ;
+separator nonempty Item "," ;
+
+
+separator   Stmt ";" ;
+SExpr.      Stmt ::= Expr ";" ;
+
+If.        Stmt ::= "if" "(" Expr ")" Block ;
+IfElse.    Stmt ::= "if" "(" Expr ")" Block "else" Block ;
+
+While.     Stmt ::= "while" "(" Expr ")" Block ;
+For.       Stmt ::= "for" "(" Ident "from" Expr "to" Expr ")" Block ;
+
+Print.     Stmt ::= "print" "(" [Expr] ")" ";" ;
+PrintEndl. Stmt ::= "printEndl" "(" [Expr] ")" ";" ;
+separator  Expr "," ;
+
+Return.    Stmt ::= "return" Expr ";" ;
+ReturnVoid. Stmt ::= "return" ";" ;
+Assign.    Stmt ::= Ident "=" Expr ";" ;
+
+FunDef.    Stmt ::= "fun" Ident "(" [Arg] ")" "->" Type Block ;
+Arg.       Arg ::= TypeOrRef Ident;
+separator  Arg "," ;
+
+
+-- Types ---------------------------------------------------
+TInt.       Type ::= "int" ;
+TBool.      Type ::= "bool" ;
+TString.    Type ::= "string" ;
+TVoid.      Type ::= "void" ;
+TList.      Type ::= "list" "<" Type ">" ;
+TLambda.    Type ::= "lambda" "<" "(" [TypeOrRef] ")" "->" Type ">" ;
+separator   Type "," ;
+
+TRType.     TypeOrRef ::= Type ;
+TRRef.      TypeOrRef ::= "&" Type ;
+separator   TypeOrRef "," ;
+
+
+-- Operators -----------------------------------------------
+Plus.      AddOp ::= "+" ;
+Minus.     AddOp ::= "-" ;
+Mul.       MulOp ::= "*" ;
+Div.       MulOp ::= "/" ;
+Mod.       MulOp ::= "%" ;
+LTH.       RelOp ::= "<" ;
+LE.        RelOp ::= "<=" ;
+GTH.       RelOp ::= ">" ;
+GE.        RelOp ::= ">=" ;
+EQ.        RelOp ::= "==" ;
+NEQ.       RelOp ::= "!=" ;
+
+-- Expression ------------------------------------------------
+EOr.       Expr ::= Expr1 "or" Expr ;       -- or < and
+EAnd.      Expr1 ::= Expr2 "and" Expr1 ;    -- and < rel operators
+ERel.      Expr2 ::= Expr2 RelOp Expr3 ;    -- rel operators < add/minus
+EAdd.      Expr3 ::= Expr3 AddOp Expr4 ;    -- add/minus < mul/div/mod
+EMul.      Expr4 ::= Expr4 MulOp Expr5 ;    -- mul/div/mod < not/negate
+ENeg.      Expr5 ::= "-" Expr6 ;
+ENot.      Expr5 ::= "not" Expr6 ;
+
+EApp.      Expr6 ::= Expr6 "(" [ExprOrRef] ")" ;
+EInt.      Expr7 ::= Integer ;
+EVar.      Expr7 ::= Ident ;
+ETrue.     Expr7 ::= "true" ;
+EFalse.    Expr7 ::= "false" ;
+EEmptyList. Expr7 ::= Type "[]" ;
+EString.   Expr7 ::= String;
+ELambda.   Expr7 ::= "(" [Arg] ")" "->" Type Block ;
+separator  Ident "," ;
+
+coercions  Expr 7 ;
+separator  Expr "," ;
+
+EorRExpr.	   ExprOrRef ::= Expr ;
+EorRRef.	   ExprOrRef ::= "&" Ident ;
+separator      ExprOrRef "," ;
+
+
+-- List operations -----------------------------------------
+SListPush.  Stmt ::= Ident "." "push" "(" Expr ")" ;
+EListLen.   Expr5 ::= Expr6 "." "len()" ;
+EListAt.    Expr5 ::= Expr6 "." "at" "(" Expr6 ")" ;
+
+
+-- Comments ------------------------------------------------
+comment    "#" ;
+comment    "//" ;
+comment    "{*" "*}" ;

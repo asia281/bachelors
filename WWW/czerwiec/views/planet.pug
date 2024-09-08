@@ -1,0 +1,35 @@
+extends base.pug
+block content
+    section.main
+        section.planetdesc
+            .bigplanetname #{p.name}
+            img.bigplanetimage.left(src=`../${p.imageUrl}` alt=`${p.name} picture`)
+            div
+              | Planeta #{p.name} dysponuje nast&eogon;puj&aogon;cymi instalacjami:
+            table
+              thead
+              tbody
+                tr
+                  td Doki klasy A:
+                  td #{p.docksA}
+                tr
+                  td Doki klasy B:
+                  td #{p.docksB}
+                tr
+                  td Doki klasy C:
+                  td #{p.docksC}
+
+        table.dockings
+          thead 
+            tr
+              th(scope='col') Nazwa statku
+              th(scope='col') Wielko&sacute;&cacute;
+              th(scope='col') Przylot
+              th(scope='col') Wylot
+          tbody
+            each stop in p.ships
+              tr
+                td #{stop.SpaceshipName}
+                td #{stop.Spaceship.class}
+                td #{stop.from}
+                td #{stop.till}

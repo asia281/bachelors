@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wall  -rdynamic CMakeFiles/spoofping.dir/spoofping.c.o  -o spoofping  liberr.a libin_cksum.a libdropnobody.a 

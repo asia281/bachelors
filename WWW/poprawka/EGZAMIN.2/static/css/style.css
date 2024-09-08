@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+}
+
+.strona {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: gainsboro;
+
+    display: grid;
+    grid-template:
+      "header header header" auto
+      "left main right" auto
+      "footer footer footer" 30px
+      / 30% auto 15%;
+    column-gap: 10px;
+    row-gap: 15px;
+}
+
+.lewa {
+    grid-area: left;
+    background-color: #B8C480;
+
+    overflow: hidden;
+}
+
+.tytul {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px 0;
+    font-size: x-large;
+}
+
+.tytul.wielki {
+    font-size: xx-large;
+}
+
+.lewa li {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.lewa img {
+    width: 80%;
+    height: 80%;
+}
+
+.glowna {
+    grid-area: main;
+    background-color: lightskyblue;
+}
+
+.glowna .mem {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.glowna .mem .obrazek {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.glowna .mem img {
+    max-width: 60%;
+    max-height: 200px;
+}
+
+.glowna .mem .link {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.glowna.memowa > img {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.glowna.memowa .opis {
+    font-style: italic;
+    text-align: justify;
+
+    margin: 10px;
+}
+
+.glowna.memowa table {
+    margin: 0px auto;
+    border-collapse: collapse;
+}
+
+.glowna.memowa td, .glowna.memowa th {
+    border-bottom: 1px solid black;
+    padding: 3px 10px;
+}
+
+.prawa {
+    grid-area: right;
+    background-color: aliceblue;
+    padding: 0 5px;
+}
+
+.stopka {
+    grid-area: footer;
+    background-color: #CB793A;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    grid-area: header;
+    font: Arial;
+    background-color: orange;
+    font-size: 12px;
+    display: grid;
+    grid-template:
+      "left main right" auto
+      / 30% auto 15%;
+    column-gap: 10px;
+    row-gap: 15px;
+}
+
+.left {
+    grid-area: left;
+    justify-content: center;
+}
+
+.right {
+    grid-area: right;
+    justify-content: center;
+}
+
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .lewa {
+        display: none;
+    }
+}
+
+.tooltip table tr {
+    position:relative; /* making the .tooltip span a container for the tooltip text */
+    border-bottom:1px dashed #000; /* little indicater to indicate it's hoverable */
+}
+
+.tooltip:before table tr {
+    content: attr(data-text); /* here's the magic */
+    position:absolute;
+    
+    /* vertically center */
+    top:50%;
+    transform:translateY(-50%);
+    
+    /* move to right */
+    left:100%;
+    margin-left:15px; /* and add a small left margin */
+    
+    /* basic styles */
+    width:200px;
+    padding:10px;
+    border-radius:10px;
+    background:#000;
+    color: #fff;
+    text-align:center;
+  
+    display:none; /* hide by default */
+  }
+
+  .tooltip:hover:before table tr {
+    display:block;
+  }

@@ -1,0 +1,15 @@
+// 14  lists
+
+list<int> lista;
+lista.push(0);
+lista.push(1);
+lista.push(10);
+printEndl(lista.len(), lista.at(2));
+
+lista.push(1);
+printEndl(lista.at(3), lista.at(0));
+
+list<bool> bool_lista;
+bool_lista.push(true);
+bool_lista.push(false);
+printEndl(bool_lista.len(), bool_lista.at(0));

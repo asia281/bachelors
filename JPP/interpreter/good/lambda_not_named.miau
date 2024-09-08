@@ -1,0 +1,2 @@
+print(( (int l) -> int { return l; })(5));
+

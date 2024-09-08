@@ -1,0 +1,12 @@
+fun factorial() -> void {
+    int i;
+}
+
+int y = 16;
+
+for (i from y to 20){
+    if (i % 4 == 1) {
+        i = i + 2;
+    }
+    printEndl(i);
+}

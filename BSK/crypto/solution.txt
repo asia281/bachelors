@@ -1,0 +1,65 @@
+1) Warmup: flag{now-you-see-me-now-you-dont}
+
+Na ekran terminala wypisywana jest 1024-bitowa liczba pierwsza m. Aby potem wejsc w guesses,
+trzeba wpisac na ekran zmienną 1 < base < m, ktora bedzie później bazą do obliczeń.
+Nastepnie, zliczana jest liczba trafien, aby dostac flage, trzeba miec > 300 trafien. Mamy maksymalnie 1000 prób
+na trafienie.
+Wpisujemy napierw nasz guess (gdzie guess jest zmienną). Następnie losujemy zmienną exp z przedzialu (2, m - 1).
+Potem wyliczamy zmienną rand = base^exp (modulo m).
+
+Jesli rand == guess, to dostajemy punkt.
+Chcemy zatem wymyslic takie base oraz nastepujace po niej guess = base^exp (modulo m).
+
+Wybierzmy base = m-1 oraz za kazdym razem robmy guess = 1. Wtedy równanie ma postać:
+1 = (m-1)^exp (modulo m)
+
+Jesli exp jest parzyste, to (m-1)^exp = (-1)^exp = 1 (mod m). Mamy 50% szans na to, ze exp bedzie przyste,
+więc w 1000 guessach powinno spokojnie trafic się 300 exp parzystych.
+
+2) Stream cipher: flag{you-need-a-CSprng-for-stream-cipher}
+
+Losowany jest klucz z przedzialu (0, 2^64). Nastepnie flaga jest encrypted korzystając z algorytmu LCG
+i wylosowanego klucza. Na out zwracana jest liczba flag ^ (zaczyfrowane 7*(iles bitow)).
+Zwracana flaga ma 82 bajty (zapisane szesnastkowo).
+
+Poniewaz dostajemy liczbe o 82 znakach (w systemie szesnastkowym), to oznacza, ze flaga ma 82 znaki w hex,
+czyli 41 bajtow.
+
+Wiemy, ze na poczatku flagi znajduje sie zawsze "flag{", a konczy "}". Mozemy skorzystac z tej wiedzy, by znalezc
+klucz -- mamy pierwsze 5 znakow, wiec pozostaje nam pozostale 6 pozycji liczby w systemie szesnastkowym do zgadniecia.
+
+Po symulacji tworzenia ciagu (tj kolejnych iteracji .next_byte), powstaje nam ciag, w ktorym musimy sprawdzic,
+czy na pozycji 82 jest znak "}". Ponadto, nalezy sprawdzic, czy ciag jest zakodowany w ascii, jesli nie,
+to zakladam, ze rowniez ten ciag nie jest poprawny. Taki skrypt w ciagu < minuty znajduje odpowiedni klucz
+oraz zwraca flagę.
+
+3) Block cipher (easier)
+Aby uzyskac encoded flage, wpisujemy do pt i ct odpowiednio: "\n" i "\n". W tej encoded fladze pierwsze 16 znakow to
+losowy ciag (init vector), nastepne 160 - 32 = 128 to zakodowana wiadomosc, a ostatnie 16 to zakodowany init vector.
+Padding jest dodawany do wszystkich stringow, liczba dodanych znakow jest rowna, 16 - len(msg) % 16, czyli
+jesli 16|len(msg), to dodawane jest 16 znakow, a jesli < 16, to 16 - (len(msg) mod 16).
+
+Wiemy ze specyfiki ECB, ze dla P1 = P2 => encoded(key, P1) = encoded(key, P2). Oznacza to, ze jesli znajdziemy
+encoded(X) = c, to dając iv = X^pt_block dla kazdego pt_block flagi, bedziemy mogli odkodować każdy z bloków flagi.
+
+Zastanowmy sie, jak uzyskac jakiekolwiek encoded(key, P). Wzór na kodowanie bloku to:
+ct_block = xor(prev_pt, aes.encrypt(xor(pt_block, prev_ct)))
+ct_block_i ^ iv = aes.encrypt(xor(pt_block, iv))
+block = xor(prev_pt, aes.encrypt(xor(pt_block, prev_ct)))
+
+
+ct_block oraz prev_ct flagi znamy dla każdego z blokow. Chcemy wziąc takie prev_pt oraz pt_block, ze
+znamy obydwa z nich i poznamy wtedy dla pewnego X wartosc: Y = aes.encrypt(X) <=> aes.decrypt(Y) = X.
+
+Intuicja:  idziemy szyfrem sekwencyjnie,  jedynym naszym polem manewru jest iv, ktore chcemy dobierac tak,
+by xor(pt_block, iv) byl znany ... generalnie duzo latwiejsze przez specyfike kodu szukanie flagi od tylu, niz
+od przodu, a wszystko za sprawa tego, ze aes.encrypt(xor(pt_block, prev_ct))) zawiera w sobie pt_block.
+-------
+Teoria:
+Weźmy pt_block rowny ostatniemy blokowi, tj pt_block = iv. Wiemy, ze flaga konczy sie znakiem '}', a po nim dodany
+jest padding. Mam hipoteze, ze ostatnie 16 znakow to albo padding, albo }_padding.
+
+
+4) Block cipher (hard)
+Tak jak w 3) aby uzyskac encoded flage, wpisujemy do pt i ct odpowiednio: "\n" i "\n".
+

@@ -1,0 +1,32 @@
+fun parity(int x) -> bool {
+    return x % 2 == 1;
+}
+
+bool par1 = parity(11);
+
+fun parity(int x) -> bool {
+    return x % 2 == 0;
+}
+
+bool par2 = parity(11);
+
+printEndl("Expected: True False, got:", par1, par2);
+
+fun parity(& int x) -> bool {
+    bool ret = (x < 5);
+    x = 5;
+    return ret;
+}
+
+int par3 = 4;
+bool par4 = parity(& par3);
+
+printEndl("Expected: 5 True, got:", par3, par4);
+
+fun parity(& int x) -> bool {
+    int x = 4;
+    return x % 2 == 0;
+}
+
+bool par5 = parity(& par3);
+printEndl("Expected: 5 True, got:", par3, par5);

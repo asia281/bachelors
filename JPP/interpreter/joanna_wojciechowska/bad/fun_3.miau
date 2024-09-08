@@ -1,0 +1,9 @@
+//  12 (statyczne typowanie)
+
+fun int_not_string(string a) -> int{
+    return a;
+};
+
+int v2 = int_not_string("string");
+
+

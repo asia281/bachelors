@@ -1,0 +1,17 @@
+extends base.pug
+block title
+    title EGZAMIN main page
+block content
+    article.glowna
+        .tytul.wielki Dostępne memy
+        each meme in context.memes
+            .mem
+            .obrazek
+                a(href=`/mem/${meme.id}`)
+                img(src=`${meme.imageUrl}` alt=`${meme.title}`)
+            
+            if meme.displayCount == 0
+                p Tego mema nie będzie już można obejrzeć.
+            else
+                p Ten mem będzie można jeszcze obejrzeć #{meme.displayCount} razy.
+            a(href=`/mem/${meme.id}`) #{meme.title}

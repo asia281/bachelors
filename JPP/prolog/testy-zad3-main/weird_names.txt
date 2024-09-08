@@ -1,0 +1,10 @@
+trasa(a, start, a, a, jeden, 1).
+trasa('b', start, 'b', 'b', jeden, 1).
+trasa(123, start, 123, 123, jeden, 1).
+trasa(+, start, +, +, jeden, 1).
+trasa(#, start, #, #, jeden, 1).
+trasa(+-*/\^><=:.?@#$&, start, +-*/\^><=:.?@#$&, +-*/\^><=:.?@#$&, jeden, 1).
+trasa([], start, [], [], jeden, 1).
+trasa({}, start, {}, {}, jeden, 1).
+trasa(;, start, ;, ;, jeden, 1).
+trasa(!, start, !, !, jeden, 1).

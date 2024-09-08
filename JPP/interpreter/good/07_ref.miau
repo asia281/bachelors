@@ -1,0 +1,15 @@
+# 06 (funkcje lub procedury, rekurencja)
+
+fun inc(& int num, int num2, & bool b) -> void{
+	num = num + 1;
+	num2 = num2 + 1;
+	b = false;
+}
+
+int x = 10;
+int y = 10;
+bool b = true;
+
+inc(& x, y, & b);
+
+print("11 =", x, " 10 =", y, " False =", b);

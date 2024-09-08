@@ -1,0 +1,8 @@
+//  9 (obsługa błędów wykonania) OutOfRangeExeption
+
+list<int> lista;
+lista.push(0);
+lista.push(1);
+lista.push(2);
+
+print(lista.len(), lista.at(4));

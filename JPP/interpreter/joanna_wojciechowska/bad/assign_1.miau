@@ -1,0 +1,3 @@
+fun empty() -> void {}
+
+int res = empty();

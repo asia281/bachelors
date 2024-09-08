@@ -1,0 +1,12 @@
+/home/asik/sik/sik-mikro-9/CMakeFiles/edit_cache.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/install/strip.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/spoofping.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/rawping.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/install.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/list_install_components.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/rebuild_cache.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/dropnobody.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/install/local.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/myping.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/in_cksum.dir
+/home/asik/sik/sik-mikro-9/CMakeFiles/err.dir

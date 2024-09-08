@@ -1,0 +1,18 @@
+zakopane.
+rusinowa.
+costam.
+rodzaj.
+rodzaj(piesza, gorska).
+dlugosc(4).
+dlugosc(le, x).
+dlugosc(le, 'str').
+dlugosc(neq, 42).
+dlugosc.
+rodzaj(piesza), rodzaj(piesza), dlugosc, rodzaj(piesza), rodzaj(piesza).
+costam(eq, 4).
+dlugosc(le, 10), dlugosc(le, 10).
+rodzaj(piesza), dlugosc(le, 10), rodzaj(gorska), dlugosc(le, 10), rodzaj(spacer).
+rodzaj(piesza), nil.
+nil, rodzaj(piesza).
+rodzaj(piesza).
+koniec.

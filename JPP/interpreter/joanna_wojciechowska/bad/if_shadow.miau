@@ -1,0 +1,6 @@
+if (true) {
+    int a = 3;
+    printEndl(a);
+}
+
+print(a);

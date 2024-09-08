@@ -1,0 +1,13 @@
+extends base.pug
+block content
+    section.planetslist
+        .title Obs&lstrok;ugiwane planety
+        
+        ul
+        each val in context.list
+            li
+                img.planetimg.left(src=`../${val.imageUrl}` alt=`${val.name} picture`)
+                .planetname #{val.name}
+                div Doki: #{val.docksA} #{val.docksB} #{val.docksC}
+                div Rezerwacje: #{val.dataValues.ct}
+                a(href=`/planet/${val.name}`) Strona planety&gt;&gt;

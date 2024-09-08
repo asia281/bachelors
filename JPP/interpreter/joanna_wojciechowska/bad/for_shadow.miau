@@ -1,0 +1,9 @@
+int i;
+
+for (i from 15 to 20){
+    int j;
+    for (j from 0 to 1){
+        int a;
+    }
+    print(a);
+}

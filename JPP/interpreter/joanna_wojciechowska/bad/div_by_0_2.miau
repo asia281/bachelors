@@ -1,0 +1,10 @@
+//  9 (obsługa błędów wykonania) ZeroDivisionException
+
+fun div(int a, int b) -> int {
+    return a / b;
+}
+
+int u = div(4, 0);
+
+print(u);
+

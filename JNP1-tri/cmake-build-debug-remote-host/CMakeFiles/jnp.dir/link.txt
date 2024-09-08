@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/jnp.dir/tri_list_example.cc.o -o jnp 

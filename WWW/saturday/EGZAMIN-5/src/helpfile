@@ -1,0 +1,31 @@
+app.mjs:
+
+import express from "express";
+import getDb from "./src/database.mjs";
+import { Op } from "sequelize";
+// import stuff from database
+
+// our app
+const app = express();
+// we're listening at port 8080
+const port = 8080;
+
+// adds a middleware for serving static files to your Express app
+app.use(express.static(".")); 
+// configures pug
+app.set('view engine', 'pug'); 
+app.set('views', './views');
+
+
+commands:
+ SELECT COUNT(hats) as n_hats from db    [db.sequelize.fn('COUNT', sequelize.col('hats')), 'n_hats']
+ exclude: ['baz']
+
+ pug:
+
+block content
+
+extends base.pug
+block content  
+
+img.planetimg.left(src=`../static/${planet.imageUrl}` alt=`${planet.name} picture`)

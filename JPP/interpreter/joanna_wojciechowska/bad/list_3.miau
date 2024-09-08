@@ -1,0 +1,6 @@
+//  9 (obsługa błędów wykonania) OutOfRangeExeption
+
+
+list<string> str_lista;
+str_lista.push(10);
+str_lista.push("lista");

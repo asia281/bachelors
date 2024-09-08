@@ -1,0 +1,5 @@
+fun basics(int a, int b) -> int {
+    return a + b;
+}
+
+basics(5, 4, 3);

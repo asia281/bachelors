@@ -1,0 +1,3 @@
+/Users/asia/jnp/cmake-build-default/CMakeFiles/rebuild_cache.dir
+/Users/asia/jnp/cmake-build-default/CMakeFiles/edit_cache.dir
+/Users/asia/jnp/cmake-build-default/CMakeFiles/jnp.dir

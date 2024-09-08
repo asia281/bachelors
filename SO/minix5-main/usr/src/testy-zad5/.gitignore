@@ -1,0 +1,8 @@
+*
+!*.cpp
+!*.c
+!*.h
+!test.sh
+!README.md
+!LICENSE
+!.gitignore

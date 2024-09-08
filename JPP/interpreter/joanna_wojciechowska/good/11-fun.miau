@@ -1,0 +1,65 @@
+# 04 (print)
+# 06 (procedury lub funkcje, rekurencja)
+# 07 (przez zmienną / przez wartość)
+# 11 (funkcje zwracające wartość)
+
+fun square(int x) -> int {
+    return x * x;
+}
+
+fun isEven(int x) -> bool {
+    return x % 2 == 0;
+}
+
+int x = square(5);
+bool y = isEven(x);
+
+fun printer() -> void{
+	int i;
+	for(i from 0 to 5){
+		if (isEven(i)){
+			printEndl(i);
+		}
+	}
+}
+
+printer(); # 0 2 4 
+
+fun printerLambda(lambda<(int)->bool> cond) -> void{
+	int i;
+	for(i from -3 to 5){
+		if (cond(i)){
+			printEndl(i);
+		}
+	}
+}
+
+printerLambda(isEven); # -2 0 2 4
+
+fun addToMap(lambda<(int)->int> map, int key, int val) -> lambda<(int)->int> {
+    return (int i) -> int {
+        if (i == key){
+            return val;
+        }
+        else{
+            return map(i);
+        }
+    };
+}
+
+lambda<(int)->int> m = (int i) -> int { return i; }
+
+m = addToMap(m, 3, 4);
+m = addToMap(m, 4, 5);
+m = addToMap(m, 5, 6);
+
+printEndl("Expected: 5 6 4 10, got", m(4), m(5), m(3), m(10));
+
+fun pow2(int exp) -> bool {
+    if (exp % 2 == 0) {
+        return isEven(exp / 2);
+    }
+    return isEven((exp - 1) / 2);
+}
+
+printEndl(pow2(9), pow2(15));

@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wall  -rdynamic CMakeFiles/rawping.dir/rawping.c.o  -o rawping  liberr.a libin_cksum.a libdropnobody.a 

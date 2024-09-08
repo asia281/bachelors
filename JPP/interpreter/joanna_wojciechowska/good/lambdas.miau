@@ -1,0 +1,18 @@
+lambda<() -> bool> var1 = () -> bool { return true; }
+
+lambda<() -> int> var2 = () -> int { return 2; }
+
+lambda<() -> string> var3 = () -> string { return "hello"; }
+
+lambda<(int, int) -> int> var4 = (int x, int y) -> int { return x + y; }
+
+bool t = var1();
+int two = var2();
+string hi = var3();
+int four = var4(1, 3);
+
+printEndl("Expected: True 2 hello 4, got:", t, two, hi, four);
+
+lambda<(lambda<() -> int>) -> int> var5 = (lambda<() -> int> l) -> int { return l(); }
+
+int five = var5(() -> int { return 5; });

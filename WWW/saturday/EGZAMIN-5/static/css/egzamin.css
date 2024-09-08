@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+}
+
+.header {
+    height: 64px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header > a {
+    display: block;
+    float: left;
+}
+
+.header > a > img {
+    height: 64px;
+    width: 64px;
+}
+
+.header > h1 {
+    box-sizing: border-box;
+    color: grey;
+    font-size: 40px;
+    height: 64px;
+    padding-top: 7px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.leftbar {
+    flex: 1 1 25%;
+}
+
+.rightbar {
+    flex: 1 1 15%;
+}
+
+
+.planetslist, .main {
+    flex: 1 1 calc(70% - 20px);
+}
+
+.container {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+}
+
+.leftbar > .title, .planetslist > .title, .rightbar > .title {
+    font-size: 30px;
+    font-variant: small-caps;
+}
+
+.planetslist > .title {
+    text-align: center;
+}
+
+.leftbar > dl > dt {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.leftbar > dl > dd {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.rightbar > div {
+    list-style: none;
+    padding-left: 0;
+}
+
+.rightbar > div > div {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.rightbar > div > div > img {
+    display: block;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.planetslist > ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.planetslist > ul > li {
+    display: block;
+    border: 2px solid grey;
+    box-shadow: 5px 5px lightgrey;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.planetslist > ul > li::before {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.planetslist > ul > li > a {
+    display: block;
+    text-align: right;
+}
+.planetimg {
+    width:80px;
+    height: 80px;
+    display: block;
+}
+
+.planetimg.left {
+    float: left;
+    margin-right: 20px;
+}
+
+.planetimg.right {
+    float: right;
+    margin-left: 20px;
+}
+
+.planetname {
+    font-size: 20px;
+    color: firebrick;
+    margin-bottom: 5px;
+}
+
+.main {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.bigplanetname {
+    font-size: 40px;
+    text-align: center;
+    font-variant: small-caps;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.bigplanetimage {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 10px auto;
+}
+
+.planetdesc table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.planetdesc table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.dockings td, .dockings th {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 30px;
+}
+
+.footer {
+    font-size: 12px;
+    text-align: center;
+    font-size: Arial;
+}
+/* make the webpage more responsive */
+@media (max-width: 800px) {
+    .rightbar {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        flex-direction: column;
+    }
+
+    .more {
+        display: none;
+    }
+}
