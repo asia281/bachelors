@@ -1,0 +1,145 @@
+Z boiska do koszykówki korzysta N > 0 dru»yn. Ka»da dru»yna skªada si¦ z K > 1 zawodników i
+ka»dy zawodnik jest na staªe przypisany do konkretnej dru»yny.
+Po przyj±ciu na boisko zawodnik oczekuje na przyj±cie wszystkich zawodników z jego dru»yny
+oraz na skompletowanie si¦ innej dru»yny. Mecz mo»e si¦ rozpocz¡¢ gdy tylko s¡ dwie kompletne
+dru»yny i boisko jest wolne. Dru»yna musi pozna¢ numer dru»yny przeciwnej: ka»dy z zawodników
+wywoªuje procedur¦ mecz(int przeciwnik).
+Zawodnik mo»e w ka»dej chwili zej±¢ z boiska (zako«czy¢ wykonanie procedury mecz). Pozostali
+zawodnicy kontynuuj¡ wówczas gr¦, nawet je±li na boisku pozostanie tylko jeden zawodnik. Zawodnik, który zako«czyª gr¦ nie mo»e do niej wróci¢: aby rozpocz¡¢ mecz musi najpierw poczeka¢
+a» ponownie zbior¡ si¦ wszyscy gracze jego druzyny oraz pewna dru»yna przeciwna.
+Wersja trudniejsza: mecze rozgrywane s¡ w o±rodku sportowym, który posiada B boisk ponumerowanych od 0 do B − 1.
+
+
+binary semaphore OCHRONA = true;
+semaphore ZAJETEBOISKO = 2;
+int jakie_graja[2] = {0, 0};
+int zawodnicy[2] = {K, K};
+binary semaphore MOZNA_ZACZAC = false, MOZNA_SKONCZYC = false;
+int cnt_zaczac = 2K, cnt_skonczyc = 2K;
+int idwolne = 1;
+
+procedura zawodnik(int id, int druzyna) {
+    P(OCHRONA)
+    int moje = -1;
+    if (jakie_graja[0] == druzyna) {
+       moje = 0;
+    }
+    else if (jakie_graja[1] == druzyna) {
+       moje = 1;
+    }
+    V(OCHRONA)
+    if (moje == -1) {
+        P(ZAJETEBOISKO);
+        P(OCHRONA);
+        moje = idwolne;
+        if (idwolne == 1) idwolne = 0;
+        jakie_graja[moje] = druzyna;
+        V(OCHRONA);
+        
+    }
+    P(OCHRONA);
+    zawodnicy[moje]--;
+    if (zawodnicy[0] == 0 && zawodnicy[1] == 0) {
+        cnt_zaczac = 2K;
+        V(MOZNA_ZACZAC);
+    }
+    V(OCHRONA)
+
+    P(MOZNA_ZACZAC)
+    cnt_zaczac--;
+    if (cnt_skonczyc > 0) V(MOZNA_ZACZAC)
+    P(OCHRONA)
+    int przeciwna = jakie_graja[moja^1];
+    V(OCHRONA)
+    mecz(przeciwna);
+
+    P(OCHRONA)
+    zawodnicy[moje]--;
+    if (zawodnicy[0] == K && zawodnicy[1] == K) {
+        cnt_skonczyc = 2K;
+        V(MOZNA_SKONCZYC);
+        jakie_graja[0] = 0;
+        jakie_graja[1] = 0;
+        idwolne = 1;
+        V(ZAJETEBOISKO);
+        V(ZAJETEBOISKO);
+    }
+    V(OCHRONA)
+
+    P(MOZNA_SKONCZYC)
+    cnt_skonczyc--;
+    if (cnt_skonczyc > 0) V(MOZNA_SKONCZYC) 
+    
+}
+
+
+//////////////////////////
+
+
+binary semaphore OCHRONA = true;
+semaphore ZAJETEBOISKO = 2B;
+map <int, int> gdziegra;
+int jakie_graja[B][2] = {0, 0};
+int zawodnicy[2] = {K, K};
+binary semaphore MOZNA_ZACZAC[B] = false, MOZNA_SKONCZYC[B] = false;
+int cnt_zaczac[B] = 2K, cnt_skonczyc[B] = 2K;
+int idwolne[B] = 1;
+int wolneboisko[2B] = {0, 0, 1, 1, ..., b-1, b-1}
+mutex COUNT = 2B-1;
+
+procedura zawodnik(int id, int druzyna) {
+    P(OCHRONA)
+    int mojeboisko = -1;
+    int moje = -1;
+    if (gdziegra[druzyna] != null) {
+        m = {mojeboisko, moje} = gdziegra[druzyna];
+    }
+    
+    V(OCHRONA)
+-----
+    if (moje == -1) {
+        P(ZAJETEBOISKO);
+        P(OCHRONA);
+        mojeboisko = wolneboisko[COUNT.DECREASE()];
+        moje = idwolne[mojeboisko];
+        if (idwolne[mojeboisko] == 1) idwolne[mojeboisko] = 0;
+        jakie_graja[m] = druzyna;
+        V(OCHRONA);
+        
+    }
+    P(OCHRONA);
+    zawodnicy[m]--;
+    if (zawodnicy[mojeboisko, 0] == 0 && zawodnicy[mojeboisko, 1] == 0) {
+        cnt_zaczac[mojeboisko] = 2K;
+        V(MOZNA_ZACZAC[mojeboisko]);
+    }
+    V(OCHRONA)
+
+    P(MOZNA_ZACZAC[mojeboisko])
+    cnt_zaczac[mojeboisko]--;
+    if (cnt_skonczyc > 0) V(MOZNA_ZACZAC[mojeboisko])
+    P(OCHRONA)
+    int przeciwna = jakie_graja[mojeboisko, moja^1];
+    V(OCHRONA)
+    mecz(przeciwna);
+
+    P(OCHRONA)
+    zawodnicy[m]--;
+    if (zawodnicy[mojeboisko, 0] == K && zawodnicy[mojeboisko, 1] == K) {
+        cnt_skonczyc[mojeboisko] = 2K;
+        V(MOZNA_SKONCZYC[mojeboisko]);
+        jakie_graja[0] = 0;
+        jakie_graja[1] = 1;
+        idwolne[mojeboisko] = 1;
+        wolneboisko[COUNT.increase()] = mojeboisko;
+        wolneboisko[COUNT.increase()] = mojeboisko;
+        V(ZAJETEBOISKO);
+        V(ZAJETEBOISKO);
+    }
+    V(OCHRONA)
+
+    P(MOZNA_SKONCZYC[mojeboisko])
+    cnt_skonczyc--;
+    if (cnt_skonczyc > 0) V(MOZNA_SKONCZYC[mojeboisko]) 
+    
+}
